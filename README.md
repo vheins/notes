@@ -11,6 +11,10 @@ This document provides documentation for a simple command-line POS (Point of Sal
 *   **Total Calculation:** The application calculates the total price of all items in the cart.
 *   **Receipt Generation:** A simple receipt is printed to the console upon checkout.
 
+## Documentation
+
+*   [Master Product Documentation](MASTER_PRODUCT.md)
+
 ## Installation
 
 To run this application, you need Python 3 installed on your system. No external libraries are required.
