@@ -62,6 +62,9 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
           ),
         );
       }
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
     } catch (error) {
       await showDialog(
         context: context,
@@ -79,11 +82,10 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
         ),
       );
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
       if (mounted) {
-        Navigator.of(context).pop();
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }

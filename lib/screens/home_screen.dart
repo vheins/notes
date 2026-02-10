@@ -61,6 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
             return const Center(child: CircularProgressIndicator());
           }
 
+          if (productProvider.error != null) {
+            return Center(
+                child: Text('An error occurred: ${productProvider.error}'));
+          }
+
           if (productProvider.products.isEmpty) {
             return const Center(child: Text('No products available.'));
           }

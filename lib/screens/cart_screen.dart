@@ -39,15 +39,30 @@ class CartScreen extends StatelessWidget {
                   TextButton(
                     onPressed: (cart.totalAmount <= 0)
                         ? null
-                        : () {
-                            // Checkout logic
-                            cart.clear();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Checkout successful! Receipt printed.'),
-                              ),
-                            );
-                            Navigator.of(context).pop();
+                        : () async {
+                            try {
+                              // Checkout logic
+                              await Future.delayed(
+                                  const Duration(milliseconds: 500));
+                              cart.clear();
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        'Checkout successful! Receipt printed.'),
+                                  ),
+                                );
+                                Navigator.of(context).pop();
+                              }
+                            } catch (e) {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Checkout failed.'),
+                                  ),
+                                );
+                              }
+                            }
                           },
                     child: const Text('ORDER NOW'),
                   )

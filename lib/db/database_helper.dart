@@ -43,7 +43,7 @@ CREATE TABLE products (
     return product.copyWith(id: id);
   }
 
-  Future<Product> readProduct(int id) async {
+  Future<Product?> readProduct(int id) async {
     final db = await instance.database;
 
     final maps = await db.query(
@@ -56,7 +56,7 @@ CREATE TABLE products (
     if (maps.isNotEmpty) {
       return Product.fromMap(maps.first);
     } else {
-      throw Exception('ID $id not found');
+      return null;
     }
   }
 

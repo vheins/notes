@@ -5,17 +5,22 @@ import 'package:pos_app/models/product.dart';
 class ProductProvider with ChangeNotifier {
   List<Product> _products = [];
   bool _isLoading = false;
+  String? _error;
 
   List<Product> get products => _products;
   bool get isLoading => _isLoading;
+  String? get error => _error;
 
   Future<void> loadProducts() async {
     _isLoading = true;
+    _error = null;
     notifyListeners();
     try {
       _products = await DatabaseHelper.instance.readAllProducts();
     } catch (e) {
-      print('Error loading products: $e');
+      _error = 'Error loading products: $e';
+      print(_error);
+      _products = [];
     } finally {
       _isLoading = false;
       notifyListeners();
